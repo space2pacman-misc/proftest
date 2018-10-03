@@ -1,7 +1,9 @@
 var answer = document.querySelectorAll(".answer");
 var button = document.querySelector(".button");
+var clearButton = document.querySelector(".clear");
 var form = document.querySelector(".form");
-var count = 0;
+var testResultJson = document.querySelector(".testResultJson");
+var unmarkedAnswers = 0;
 var directionObj = {
 	programming: 0,
 	testing: 0,
@@ -12,6 +14,8 @@ var directionObj = {
 }
 
 button.addEventListener("click", getResult);
+clearButton.addEventListener("click", clearForm)
+
 
 function eventRecovery() {
 	form.onsubmit = function(e) {
@@ -61,33 +65,41 @@ function validate() {
 	} 
 }
 
-function clear() {
-
+function clearForm() {
+	answer.forEach(function(item) {
+		item.checked = false;
+	})
+	unmarkedAnswers = 0;
 }
 
 function getResult() {
 	if(validate()) {
 		checkAnswer();
 
-		if (count>0)
+		if (unmarkedAnswers>0)
 			//document.test.s1.value="Вы выполнили не все задания. Проверьте себя!"
 			console.log("Вы выполнили не все задания. Проверьте себя!")
 		else
 		{
 			getAnswer();
 			eventRecovery();
+			jsonToInput();
 		}
 		
 	}
 					
 }
 
+function jsonToInput() {
+	testResultJson.value = JSON.stringify(directionObj);
+}
+
 function checkAnswer() {
 	for(var i = 0; i < answer.length; i+=2) {
 
-		// Если один из ответов не отмечен то count++
+		// Если один из ответов не отмечен то unmarkedAnswers++
 		if(!answer[i].checked && !answer[i+1].checked) {
-			count++
+			unmarkedAnswers++
 		}
 	}
 }
