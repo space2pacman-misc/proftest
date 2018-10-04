@@ -30,6 +30,7 @@ app.post("/result", function(request, response) {
 		"Имя: " + formData.firstName +
 		" Фамилия: " + formData.lastName +
 		" Email: " + formData.email + 
+		" Телефон: " + formData.phone + 
 		" Результат: " + testResultToFile +
 		"\r\n"
 		);

@@ -1,6 +1,7 @@
 var answer = document.querySelectorAll(".answer");
 var button = document.querySelector(".button");
 var clearButton = document.querySelector(".clear");
+var alertElement = document.querySelector(".alert");
 var form = document.querySelector(".form");
 var testResultJson = document.querySelector(".testResultJson");
 var unmarkedAnswers = 0;
@@ -65,6 +66,13 @@ function validate() {
 	} 
 }
 
+function showAlert() {
+	alertElement.classList.add("show");
+	setTimeout(function() {
+		alertElement.classList.remove("show");
+	}, 3000)
+}
+
 function clearForm() {
 	answer.forEach(function(item) {
 		item.checked = false;
@@ -76,11 +84,9 @@ function getResult() {
 	if(validate()) {
 		checkAnswer();
 
-		if (unmarkedAnswers>0)
-			//document.test.s1.value="Вы выполнили не все задания. Проверьте себя!"
-			console.log("Вы выполнили не все задания. Проверьте себя!")
-		else
-		{
+		if (unmarkedAnswers>0) {
+			showAlert();
+		} else {
 			getAnswer();
 			eventRecovery();
 			jsonToInput();
@@ -95,6 +101,8 @@ function jsonToInput() {
 }
 
 function checkAnswer() {
+	unmarkedAnswers = 0;
+
 	for(var i = 0; i < answer.length; i+=2) {
 
 		// Если один из ответов не отмечен то unmarkedAnswers++

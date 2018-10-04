@@ -7,9 +7,16 @@
 </head>
 <body>
 
-	<style>
+<style>
 	.uk-radio:checked {
 		background-position: -1px -1px;
+	}
+	.alert {
+		transition: all, .25s;
+		opacity: 0
+	}
+	.show {
+		opacity: 1;
 	}
 </style>
 
@@ -115,10 +122,13 @@
 	<input class="answer uk-radio" data-direction="programming gameDev testing" type="radio" name="q25"/> спокойный<br />
 	<input class="answer uk-radio" data-direction="internetMarketing" type="radio" name="q25"/> импульсивный	
 
+	<div class="uk-alert uk-alert-danger alert">Вы выполнили не все задания. Проверьте себя!</div>
+
 	<form action="/result" method="POST" class="uk-margin-top form">
 		<input class="uk-input uk-margin-small-top form-input" placeholder="Имя" name="firstName">
 		<input class="uk-input uk-margin-small-top form-input" placeholder="Фамилия" name="lastName">
 		<input class="uk-input uk-margin-small-top form-input" placeholder="E-mail" name="email">
+		<input class="uk-input uk-margin-small-top form-input" placeholder="Телефон" name="phone">
 		<input type="text" class="testResultJson" name="testResultJson" hidden>
 		<input class="button uk-button uk-button-default uk-margin-small-top uk-width-1-1" type="submit" value="Pезультат"/>
 		<input class="clear uk-button uk-button-default uk-margin-small-top uk-width-1-1" value="Сбросить ответы"/>
