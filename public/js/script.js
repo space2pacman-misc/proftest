@@ -5,6 +5,14 @@ var alertElement = document.querySelector(".alert");
 var form = document.querySelector(".form");
 var testResultJson = document.querySelector(".testResultJson");
 var unmarkedAnswers = 0;
+var directionTranslate = {
+	programming: "Программирование",
+	testing: "Тестирование",
+	design: "Дзайн",
+	businessAnalysis: "Бизнес-анализ",
+	gameDev: "Разработка игр",
+	internetMarketing: "Интернет-маркетинг"
+};
 var directionObj = {
 	programming: 0,
 	testing: 0,
@@ -97,7 +105,13 @@ function getResult() {
 }
 
 function jsonToInput() {
-	testResultJson.value = JSON.stringify(directionObj);
+	var obj = {};
+
+	for (item in directionObj) {
+		obj[directionTranslate[item]] = directionObj[item]
+	}
+
+	testResultJson.value = JSON.stringify(obj);
 }
 
 function checkAnswer() {

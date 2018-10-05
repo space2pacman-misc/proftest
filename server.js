@@ -16,22 +16,13 @@ app.get("/result", function(request, response) {
 
 app.post("/result", function(request, response) {
 	var formData = request.body;
-	var symbols  = {
-		from: ["{","}","programming","testing","design","businessAnalysis","gameDev","internetMarketing"],
-		to: ["(",")","Программирование","Тестирование","Дизайн","Бизнес анализ","Разработка игр","Интернет-маркетинг"]
-	}
-	var testResultToFile = formData.testResultJson;
-
-	for(var i = 0; i < symbols.from.length; i++) {
-		testResultToFile = testResultToFile.replace(symbols.from[i], symbols.to[i]);
-	}
 
 	fs.appendFile("data.txt", 
 		"Имя: " + formData.firstName +
 		" Фамилия: " + formData.lastName +
 		" Email: " + formData.email + 
 		" Телефон: " + formData.phone + 
-		" Результат: " + testResultToFile +
+		" Результат: " + formData.testResultJson +
 		"\r\n"
 		);
 
